@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Equipment {
+  id               String   @id @default(uuid()) @db.VarChar(255)
+  name             String   @db.VarChar(255)
+  location         String   @db.VarChar(255)
+  department       Department
+  model            String   @db.VarChar(255)
+  serialNumber     String   @db.VarChar(255)
+  installDate      DateTime @db.Date
+  status           EquipmentStatus
+  maintenanceRecords MaintenanceRecord[]
+}
+
+model MaintenanceRecord {
+  id               String   @id @default(uuid()) @db.VarChar(255)
+  equipmentId      String   @db.VarChar(255)
+  date             DateTime @db.Date
+  type             MaintenanceType
+  technician       String   @db.VarChar(255)
+  hoursSpent       Decimal  @db.Decimal(5,2)
+  description      String   @db.Text
+  partsReplaced    Json?
+  priority         Priority
+  completionStatus CompletionStatus
+  equipment        Equipment @relation(fields: [equipmentId], references: [id])
+}
+
+enum Department {
+  Machining
+  Assembly
+  Packaging
+  Shipping
+}
+
+enum EquipmentStatus {
+  Operational
+  Down
+  Maintenance
+  Retired
+}
+
+enum MaintenanceType {
+  Preventive
+  Repair
+  Emergency
+}
+
+enum Priority {
+  Low
+  Medium
+  High
+}
+
+enum CompletionStatus {
+  Complete
+  Incomplete
+  PendingParts
+}
