@@ -10,7 +10,7 @@ This project is a simple maintenance tracking system that allows technicians to 
 - npm
 
 ### Installation Steps
-1. Clone the repository **** https://github.com/NnaHill/react-coding-challenge-maintenance-tracking-system-live.git
+1. Clone the repository **** https://github.com/NnaHill/react-coding-challenge-coding-canal-PHASE2.git
 
 2. Navigate to the project directory  ***  cd maintenance
 3. Install dependencies ***    npm install
